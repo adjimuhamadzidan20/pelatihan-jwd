@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 07 Bulan Mei 2025 pada 17.02
--- Versi server: 10.4.32-MariaDB
--- Versi PHP: 8.1.31
+-- Generation Time: May 08, 2025 at 09:44 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `admin`
+-- Table structure for table `admin`
 --
 
 CREATE TABLE `admin` (
@@ -34,17 +34,17 @@ CREATE TABLE `admin` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `admin`
+-- Dumping data for table `admin`
 --
 
 INSERT INTO `admin` (`id`, `username`, `password`) VALUES
-(1, 'adji123', '$2y$10$Zvhdvrz04Wl9Yjkf6tGnNeMildsRzf7X2gaRyQP91zlY0IKwuj/Zy'),
-(2, 'admin', '$2y$10$VENI6.4hvcImhOwh7GasyesEs..EGFnmanMtb86YzopJEN8K8IAWS');
+(1, 'adji123', '$2y$10$EIirqQxHYVWLfpD2fgt4Cu/RHgsH2NbFcs86XBiTIbRVLGYjoxg3O'),
+(2, 'admin', '$2y$10$9OhspwwKJFU13uXg.epPCuMnh/gizP83bikH0djP6xI9tmvj/fSAu');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `produk`
+-- Table structure for table `produk`
 --
 
 CREATE TABLE `produk` (
@@ -58,45 +58,82 @@ CREATE TABLE `produk` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `produk`
+-- Dumping data for table `produk`
 --
 
 INSERT INTO `produk` (`id_produk`, `nama_produk`, `kategori_produk`, `gambar`, `harga`, `deskripsi`, `stok`) VALUES
-(1, 'Kemeja Hitam', 'Pakaian', 'SSL.jpg', 120000, 'Kemeja hitam cocok untuk dipakai pada pesta pernikahan dan lainnya', 100),
-(3, 'Kipas Angin ', 'Elektronik', 'pexels-allan-mas-5622347.jpg', 600000, 'Kipas angin untuk ruangan', 100),
-(4, 'Mesin Cuci', 'Elektronik', 'pexels-arshad-sutar-1749303.jpg', 4000000, 'Mesin cuci untuk membersihkan pakaian dll', 100);
+(1, 'Kemeja Safari', 'Pakaian', 'About.jpg', 12000, 'Barang bagus', 100),
+(2, 'Kemeja Putih', 'Pakaian', 'soto ayam.jpg', 20000, 'Cocok untuk melamar kerja', 120),
+(3, 'Mesin Cuci ', 'Elektronik', 'hidup_sehat.jpg', 4000000, 'Mesin cuci untuk mencuci pakaian dan celana', 100),
+(4, 'Kipas Angin Besar', 'Elektronik', 'tsinghua.jpg', 200000, 'Kipas angin sejuk ', 100);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user`
+--
+
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `nama_lengkap` varchar(50) NOT NULL,
+  `no_telepon` varchar(20) NOT NULL,
+  `alamat` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`id`, `username`, `password`, `nama_lengkap`, `no_telepon`, `alamat`, `created_at`) VALUES
+(2, 'beyourselfit', '$2y$10$.oDmdnmEihSZvJUct7lvRexVtg2xL12yI35irknm5zhKucNDANwzi', 'Beyourselfit', '0899999', 'Kota Bekasi', '2025-05-08 06:23:20'),
+(3, 'admin', '$2y$10$5qWyXWC4dcqel4HXbhJcz.rxpRnGpEt9KA.NQt4ITaNI2Fj0zr47i', 'Adji Muhamad Zidan', '08999788', 'Kota Bekasi', '2025-05-08 06:24:45');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indeks untuk tabel `admin`
+-- Indexes for table `admin`
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `produk`
+-- Indexes for table `produk`
 --
 ALTER TABLE `produk`
   ADD PRIMARY KEY (`id_produk`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `admin`
+-- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT untuk tabel `produk`
+-- AUTO_INCREMENT for table `produk`
 --
 ALTER TABLE `produk`
-  MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

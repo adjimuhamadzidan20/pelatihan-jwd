@@ -60,7 +60,7 @@ if (isset($_POST['submit'])) {
         <div class="head-title d-flex my-3 justify-content-between align-items-center">
             <h1 class="text-left fs-3">HALAMAN ADMIN</h1>
             <div>
-                <a href="logout.php" class="btn btn-primary btn-sm">Logout</a>
+                <a href="logout.php" class="btn btn-primary btn-sm" onclick="return confirm('Anda yakin?')">Logout</a>
             </div>
         </div>
 

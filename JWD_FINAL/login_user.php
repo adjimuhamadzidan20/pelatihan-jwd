@@ -10,10 +10,10 @@
 
 <body>
     <div class="container">
-        <div class="row p-4">
-            <h2>Login User</h2>
-            <div class="col-5 mt-3">
-                <form action="proses_login_user.php" method="POST">
+        <div class="row m-4">
+            <div class="col-5 border p-4 rounded">
+                <h2 class="mb-4">Login User</h2>
+                <form action="config_process/proses_login_user.php" method="POST">
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Username</label>
                         <input type="username" class="form-control" id="exampleFormControlInput1" placeholder="Username" name="username" required>

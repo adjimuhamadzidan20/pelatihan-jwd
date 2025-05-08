@@ -10,9 +10,9 @@
 
 <body>
     <div class="container">
-        <div class="row p-4">
-            <h2>Login Admin</h2>
-            <div class="col-5 mt-3">
+        <div class="row m-4">
+            <div class="col-5 border p-4 rounded">
+                <h2 class="mb-4">Login Admin</h2>
                 <form action="proses_login.php" method="POST">
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Username</label>

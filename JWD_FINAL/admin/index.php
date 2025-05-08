@@ -1,5 +1,5 @@
 <?php
-require '../config.php';
+require "../config_process/config.php";
 
 session_start();
 

@@ -35,7 +35,20 @@ nav .nav-elemen ul li a {
     color: white;
 }
 
+nav .nav-elemen ul li span {
+    color: white;
+}
+
 nav .nav-elemen ul li a:hover {
+    color: lightgray;
+}
+
+.opsi {
+    text-decoration: none;
+    color: white;
+}
+
+.opsi:hover {
     color: lightgray;
 }
 
@@ -51,7 +64,7 @@ main {
 
 .title {
     font-size: 25px;
-    
+    margin-top: 10px;
 }
 
 .sub-title {
@@ -121,6 +134,11 @@ main {
     transition: 0.2s;
 }
 
+.container .deskripsi {
+    width: 500px;
+    text-align: justify;
+}
+
 .cari-input {
     padding: 10px;
     width: 300px;
@@ -142,4 +160,40 @@ main {
     border: 1px solid blue;
     color: white;
     transition: 0.2s;
+}
+
+/* produk */
+.produk-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.produk-card {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.riwayat-pesanan {
+    margin-top: 40px;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+}
+
+.status-pending {
+    color: #f39c12;
+}
+
+.status-processing {
+    color: #3498db;
+}
+
+.status-shipped {
+    color: #2ecc71;
+}
+
+.status-completed {
+    color: #27ae60;
 }

@@ -1,3 +1,21 @@
+<?php
+require 'config_process/config.php';
+
+// untuk nampilin produk
+$query = "SELECT * FROM produk";
+$result = mysqli_query($conn, $query);
+
+
+// untuk search produk
+$keyword = isset($_GET['keyword']) ? $_GET['keyword'] : '';
+if (!empty($keyword)) {
+    // mencari berdasarkan nama_produk atau kategori_produk
+    $query .= " WHERE nama_produk LIKE '%$keyword%' OR kategori_produk LIKE '%$keyword%'";
+}
+
+$result = mysqli_query($conn, $query);
+?>
+
 <h1 class="title">HALAMAN CUSTOMER</h1>
 <h2 class="sub-title">Daftar Produk</h2>
 
@@ -21,7 +39,7 @@
                     <p>Stok: <?php echo $row['stok']; ?></p>
                 </div>
                 <div class="wrap-btn">
-                    <button class="btn-cart">Add to cart</button>
+                    <button class="btn-cart" onclick="addToCart(<?php echo $row['id_produk']; ?>)">Add to cart</button>
                 </div>
             </div>
         <?php } ?>

@@ -1,5 +1,5 @@
 <?php
-include "../config.php";
+include "../config_process/config.php";
 
 if (!isset($_GET['id'])) {
     echo "ID tidak ditemukan!";

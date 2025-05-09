@@ -8,40 +8,6 @@ if (!isset($_SESSION['admin_id'])) {
     exit;
 }
 
-// proses form ketika submit
-if (isset($_POST['submit'])) {
-    $nama_produk = $_POST['nama_produk'];
-    $kategori_produk = $_POST['kategori_produk'];
-    $harga = $_POST['harga'];
-    $deskripsi = $_POST['deskripsi'];
-    $stok = $_POST['stok'];
-
-    // fungsi upload gambar
-    $gambar = $_FILES['gambar']['name'];
-    $tmp_name = $_FILES['gambar']['tmp_name'];
-    $upload_dir = 'uploads/';
-
-    if (!file_exists($upload_dir)) {
-        mkdir($upload_dir, 0777, true);
-    }
-
-    $gambar_path = $upload_dir . basename($gambar);
-
-    if (move_uploaded_file($tmp_name, $gambar_path)) {
-        $query = "INSERT INTO produk VALUES ('', '$nama_produk', '$kategori_produk', '$gambar', '$harga', '$deskripsi', '$stok')";
-        $result = mysqli_query($conn, $query);
-
-        if ($result) {
-            echo 'Produk berhasil ditambahkan!';
-            header("Location: " . $_SERVER['PHP_SELF']);
-            exit();
-        } else {
-            echo 'Error :' . mysqli_error($conn);
-        }
-    } else {
-        echo 'Gambar gagal diupload!';
-    }
-}
 ?>
 
 <!DOCTYPE html>
@@ -52,59 +18,28 @@ if (isset($_POST['submit'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/bootstrap-5.3.6/dist/css/bootstrap.min.css">
 </head>
 
 <body>
     <div class="container">
-        <div class="head-title d-flex my-3 justify-content-between align-items-center">
-            <h1 class="text-left fs-3">HALAMAN ADMIN</h1>
+        <div class="head-title d-flex mt-4 mb-3 justify-content-between align-items-center">
+            <h1 class="text-left fs-4">DASHBOARD ADMIN</h1>
             <div>
                 <a href="logout.php" class="btn btn-primary btn-sm" onclick="return confirm('Anda yakin?')">Logout</a>
             </div>
         </div>
-
-        <div class="row border border-1 p-3 rounded">
-            <div class="col">
-                <form action="" method="post" enctype="multipart/form-data">
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Nama Produk</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="nama_produk" placeholder="Nama Produk" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Kategori Produk</label>
-                        <select class="form-select" aria-label="Default select example" name="kategori_produk" required>
-                            <option value="" selected>-- Pilih Kategori --</option>
-                            <option value="Elektronik">Elektronik</option>
-                            <option value="Pakaian">Pakaian</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="formFile" class="form-label">Gambar</label>
-                        <input class="form-control" type="file" id="formFile" name="gambar" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Harga</label>
-                        <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="harga" placeholder="Harga" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="floatingTextarea">Deskripsi</label>
-                        <textarea class="form-control" placeholder="Deskripsi" id="floatingTextarea" name="deskripsi" required></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Stok</label>
-                        <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="stok" placeholder="Stok" required>
-                    </div>
-                    <button type="submit" name="submit" class="btn btn-primary">Tambah Produk</button>
-                </form>
-            </div>
-        </div>
     </div>
 
-    <div class="container my-5">
-        <div class="row border border-1 p-3 rounded">
+    <div class="container">
+        <div class="row border border-1 p-3 rounded mb-4">
             <div class="col">
-                <h3>Data Produk</h3>
+                <div class="d-flex justify-content-between">
+                    <h3>Data Produk</h3>
+                    <div>
+                        <a href="tambah_produk.php" class="btn btn-primary btn-sm">Tambah Produk</a>
+                    </div>
+                </div>
 
                 <table class="table mt-4">
                     <tr>
@@ -115,7 +50,7 @@ if (isset($_POST['submit'])) {
                         <th>Harga</th>
                         <th>Deskripsi</th>
                         <th>Stok</th>
-                        <th>Aksi</th>
+                        <th class="text-center">Aksi</th>
                     </tr>
 
                     <?php
@@ -134,7 +69,7 @@ if (isset($_POST['submit'])) {
                                 <td><?php echo $row['harga']; ?></td>
                                 <td><?php echo $row['deskripsi']; ?></td>
                                 <td><?php echo $row['stok']; ?></td>
-                                <td>
+                                <td class="text-center">
                                     <a class="btn btn-primary btn-sm" href="edit_produk.php?id=<?php echo $row['id_produk']; ?>">Edit</a>
                                     <a class="btn btn-primary btn-sm" href="hapus_produk.php?id=<?php echo $row['id_produk']; ?>" onclick="return confirm('Yakin ingin hapus produk ini?');">Delete</a>
                                 </td>
@@ -148,11 +83,104 @@ if (isset($_POST['submit'])) {
                 </table>
             </div>
         </div>
+
+        <div class="row border border-1 p-3 rounded mb-4">
+            <div class="col">
+                <h3>Data User</h3>
+                <table class="table mt-4">
+                    <tr>
+                        <th>No</th>
+                        <th>Username</th>
+                        <th>Nama lengkap</th>
+                        <th>No telp</th>
+                        <th>Alamat</th>
+                        <th>Waktu Pembuatan</th>
+                    </tr>
+
+                    <?php
+                    $no = 1;
+                    $query_user = "SELECT * FROM user";
+                    $result_user = mysqli_query($conn, $query_user);
+
+                    if (mysqli_num_rows($result_user) > 0) :
+                        while ($row_user = mysqli_fetch_assoc($result_user)) :
+                    ?>
+                            <tr>
+                                <td><?php echo $no++; ?></td>
+                                <td><?php echo $row_user['username']; ?></td>
+                                <td><?php echo $row_user['nama_lengkap']; ?></td>
+                                <td><?php echo $row_user['no_telepon']; ?></td>
+                                <td><?php echo $row_user['alamat']; ?></td>
+                                <td><?php echo $row_user['created_at']; ?></td>
+
+                            </tr>
+                    <?php
+                        endwhile;
+                    else :
+                        echo "<tr><td colspan='8'>Tidak ada data produk.</td></tr>";
+                    endif;
+                    ?>
+                </table>
+            </div>
+        </div>
+
+        <div class="row border border-1 p-3 rounded mb-4">
+            <div class="col">
+                <h3>Data Pesanan</h3>
+
+                <table class="table mt-4">
+                    <tr>
+                        <th>ID Pesanan</th>
+                        <th>Pelanggan</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                        <th>Tanggal</th>
+                        <th>Aksi</th>
+                    </tr>
+                    <?php
+                    $query_pesanan = "SELECT pesanan.*, user.username 
+                    FROM pesanan JOIN user ON pesanan.id_user = user.id_user
+                    ORDER BY pesanan.created_at DESC";
+                    $result_pesanan = mysqli_query($conn, $query_pesanan);
+
+                    if (mysqli_num_rows($result_pesanan) > 0) :
+                        while ($row = mysqli_fetch_assoc($result_pesanan)) :
+                    ?>
+                            <tr>
+                                <td><?= $row['id_pesanan'] ?></td>
+                                <td><?= $row['username'] ?></td>
+                                <td>Rp <?= number_format($row['total'], 0, ',', '.') ?></td>
+                                <td>
+                                    <form action="update_status.php" method="POST" style="display:inline;">
+                                        <input type="hidden" name="id_pesanan" value="<?= $row['id_pesanan'] ?>">
+                                        <select name="status" onchange="this.form.submit()">
+                                            <option value="pending" <?= ($row['status'] == 'pending') ? 'selected' : '' ?>>pending</option>
+                                            <option value="diproses" <?= ($row['status'] == 'diproses') ? 'selected' : '' ?>>Diproses</option>
+                                            <option value="dikirim" <?= ($row['status'] == 'dikirim') ? 'selected' : '' ?>>Dikirim</option>
+                                            <option value="selesai" <?= ($row['status'] == 'selesai') ? 'selected' : '' ?>>Selesai</option>
+                                        </select>
+                                    </form>
+                                </td>
+                                <td><?= date('d/m/Y', strtotime($row['created_at'])) ?></td>
+                                <td>
+                                    <a href="detail_pesanan.php?id=<?= $row['id_pesanan'] ?>">Detail</a>
+                                </td>
+                            </tr>
+                        <?php endwhile; ?>
+                    <?php else : ?>
+                        <tr>
+                            <td colspan="6">Tidak ada pesanan.</td>
+                        </tr>
+                    <?php endif; ?>
+                </table>
+            </div>
+        </div>
     </div>
 
     <br><br><br><br>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+    <script src="assets/bootstrap-5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 
 </html>

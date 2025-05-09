@@ -12,7 +12,7 @@
     <div class="container">
         <div class="row m-4">
             <div class="col-5 border p-4 rounded">
-                <h2 class="mb-4>Register Admin</h2>
+                <h2 class="mb-4">Register Admin</h2>
                 <form action=" proses_register.php" method="POST">
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Username</label>
@@ -25,7 +25,7 @@
 
                     <button type="submit" class="btn btn-primary btn-sm mb-2">Register</button>
                     <p>Sudah punya akun? <a href="login.php">Login di sini</a></p>
-                    </form>
+                </form>
             </div>
         </div>
     </div>

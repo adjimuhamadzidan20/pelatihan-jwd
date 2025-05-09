@@ -3,17 +3,15 @@ require 'config.php';
 session_start();
 
 if (!isset($_SESSION['user_id'])) {
-    $noticeErr = [
+    echo json_encode([
         'status' => 'error',
         'message' => 'silahkan login dahulu!'
-    ];
-
-    echo json_encode($noticeErr);
+    ]);
     exit;
 }
 
 $id_produk = $_POST['id_produk'];
-$id_user = $_POST['id_user'];
+$id_user = $_SESSION['user_id'];
 
 $sql = "SELECT * FROM keranjang WHERE id_user = '$id_user' AND id_produk = '$id_produk'";
 $result = mysqli_query($conn, $sql);
@@ -28,9 +26,7 @@ if ($dataKeranjang > 0) {
     mysqli_query($conn, $insertSql);
 }
 
-$noticeOk = [
+echo json_encode([
     'status' => 'success',
     'message' => 'produk ditambahkan ke keranjang!'
-];
-
-echo json_encode($noticeOk);
+]);

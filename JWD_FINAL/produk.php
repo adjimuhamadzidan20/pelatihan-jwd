@@ -5,7 +5,6 @@ require 'config_process/config.php';
 $query = "SELECT * FROM produk";
 $result = mysqli_query($conn, $query);
 
-
 // untuk search produk
 $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : '';
 if (!empty($keyword)) {

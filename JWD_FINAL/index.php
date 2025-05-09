@@ -86,7 +86,7 @@ session_start();
                 alert("Silakan login terlebih dahulu!");
                 window.location.href = "login_user.php";
             <?php else: ?>
-                fetch("add_to_cart.php", {
+                fetch("config_process/proses_addtocart.php", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/x-www-form-urlencoded"
